@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_action"
+                android:title="アクション"/>
+        <item
+                android:id="@+id/nav_drama"
+                android:title="ドラマ"/>
+        <item
+                android:id="@+id/nav_comedy"
+                android:title="コメディ"/>
+        <item
+                android:id="@+id/nav_horror"
+                android:title="ホラー"/>
+        <item
+                android:id="@+id/nav_history"
+                android:title="歴史物"/>
+        <item
+                android:id="@+id/nav_documentary"
+                android:title="ドキュメンタリ－"/>
+        <item
+                android:id="@+id/nav_mystery"
+                android:title="ミステリー"/>
+        <item
+                android:id="@+id/nav_sci_fi"
+                android:title="SF"/>
+        <item
+                android:id="@+id/nav_animation"
+                android:title="アニメ"/>
+        <item
+                android:id="@+id/nav_kids"
+                android:title="子供向け"/>
+
+
+    </group>
+</menu>

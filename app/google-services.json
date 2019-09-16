@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "426667323417",
+    "firebase_url": "https://movierecommendingapp.firebaseio.com",
+    "project_id": "movierecommendingapp",
+    "storage_bucket": "movierecommendingapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426667323417:android:a8fae4bb920407d3103a88",
+        "android_client_info": {
+          "package_name": "com.example.movierecommendingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426667323417-ucktm62c8ettjkmdd3lavmvlq7o8kone.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuLpHTyXZlu4Eq2-uPQDFLPjnCpwvqsbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426667323417-ucktm62c8ettjkmdd3lavmvlq7o8kone.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
