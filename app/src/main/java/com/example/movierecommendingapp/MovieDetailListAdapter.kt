@@ -3,12 +3,19 @@ package com.example.movierecommendingapp
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 
 class MovieDetailListAdapter (context: Context, private val mMovie: Movie) : BaseAdapter() {
@@ -57,6 +64,7 @@ class MovieDetailListAdapter (context: Context, private val mMovie: Movie) : Bas
             val body = mMovie.body
             val name = mMovie.name
 
+
             val bodyTextView = convertView.findViewById<View>(R.id.bodyTextView) as TextView
             bodyTextView.text = body
 
@@ -69,6 +77,21 @@ class MovieDetailListAdapter (context: Context, private val mMovie: Movie) : Bas
                 val imageView = convertView.findViewById<View>(R.id.imageView) as ImageView
                 imageView.setImageBitmap(image)
             }
+
+
+            val comment = mMovie.comments[position]
+
+            var convertView = convertView
+
+            val grade = comment.grade
+
+            val gradeTextView = convertView.findViewById<View>(R.id.grade) as TextView
+            gradeTextView.text = grade
+
+
+
+
+
         } else {
             if (convertView == null) {
                 convertView = mLayoutInflater!!.inflate(R.layout.list_comment, parent, false)!!
@@ -88,6 +111,10 @@ class MovieDetailListAdapter (context: Context, private val mMovie: Movie) : Bas
 
             val gradeTextView = convertView.findViewById<View>(R.id.points) as TextView
             gradeTextView.text = grade
+
+
+
+
         }
 
         return convertView

@@ -18,7 +18,9 @@ import android.util.Base64
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.list_question_detail.*
 import java.util.*
+import java.util.Arrays.sort
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -52,6 +54,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     byteArrayOf()
                 }
 
+
+            var total = 0
+
             val commentArrayList = ArrayList<Comment>()
             val commentMap = map["comments"] as Map<String, String>?
             if (commentMap != null) {
@@ -59,21 +64,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val temp = commentMap[key] as Map<String, String>
                     val commentBody = temp["body"] ?: ""
                     val commentName = temp["name"] ?: ""
-                    val commentUid = temp["uid"] ?: ""
+
+                    val uid = temp["uid"] ?: ""
+
 
                     val grade = temp["grade"] ?: ""
 
-                    val comment = Comment(commentBody, commentName, commentUid,grade,key)
+                    val comment = Comment(commentBody, commentName, uid,key,grade)
                     commentArrayList.add(comment)
+
+                 total += grade.toInt()
+
                 }
             }
 
-            val comment = Movie(title, body, name, uid, dataSnapshot.key ?: "",
-                mGenre, bytes, commentArrayList)
-            mMoviesArrayList.add(comment)
+
+
+
+            val movie = Movie(title, body, name, uid, dataSnapshot.key ?: "",
+                mGenre, bytes, commentArrayList,total)
+
+            mMoviesArrayList.add(movie)
+
+            val sortedList = mMoviesArrayList.sortedWith(compareBy({ it.total }))
+
+
+            mMoviesArrayList = ArrayList<>.sortedList
+
             mAdapter.notifyDataSetChanged()
         }
-
         override fun onChildChanged(dataSnapshot: DataSnapshot, s: String?) {
             val map = dataSnapshot.value as Map<String, String>
 
@@ -88,11 +107,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             val temp = movieMap[key] as Map<String, String>
                             val commentBody = temp["body"] ?: ""
                             val commentName = temp["name"] ?: ""
-                            val commentUid = temp["uid"] ?: ""
+                            val uid = temp["uid"] ?: ""
 
                             val grade = temp["grade"] ?: ""
 
-                            val comment = Comment(commentBody, commentName, commentUid,grade, key)
+                            val comment = Comment(commentBody, commentName, uid,key,grade)
                             movie.comments.add(comment)
                         }
                     }
@@ -162,6 +181,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mListView = findViewById(R.id.listView)
         mAdapter = MoviesListAdapter(this)
         mMoviesArrayList = ArrayList<Movie>()
+
         mAdapter.notifyDataSetChanged()
 
 

@@ -108,13 +108,20 @@ class CommentSendActivity: AppCompatActivity(), View.OnClickListener, DatabaseRe
 
             val commentRef = dataBaseReference.child(ContentsPATH).child(mMovie.genre.toString()).child(mMovie.questionUid).child(CommentsPATH)
 
-            commentRef.child(ContentsPATH).removeValue()
+
 
             val data = HashMap<String, String>()
 
             // UID
             data["uid"] = FirebaseAuth.getInstance().currentUser!!.uid
 
+            val userId = FirebaseAuth.getInstance().currentUser!!.uid
+
+
+
+
+
+            commentRef.child(userId).removeValue()
 
 
 

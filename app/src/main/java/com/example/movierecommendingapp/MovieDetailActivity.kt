@@ -3,6 +3,9 @@ package com.example.movierecommendingapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -20,7 +23,7 @@ class MovieDetailActivity : AppCompatActivity() {
             val commentUid = dataSnapshot.key ?: ""
 
             for (comment in mMovie.comments) {
-                // 同じAnswerUidのものが存在しているときは何もしない
+                // 同じcommentUidのものが存在しているときは何もしない
                 if (commentUid == comment.commentUid) {
                     return
                 }
@@ -34,7 +37,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
             val grade = map["grade"] ?: ""
 
-            val comment = Comment(body, name, uid, commentUid,grade)
+            val comment = Comment(body, name, uid,commentUid,grade)
             mMovie.comments.add(comment)
             mAdapter.notifyDataSetChanged()
         }
@@ -55,6 +58,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +91,10 @@ class MovieDetailActivity : AppCompatActivity() {
             }
         }
 
+
+
         val dataBaseReference = FirebaseDatabase.getInstance().reference
+
         mCommentRef = dataBaseReference.child(ContentsPATH).child(mMovie.genre.toString()).child(mMovie.questionUid).child(CommentsPATH)
         mCommentRef.addChildEventListener(mEventListener)
     }
